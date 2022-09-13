@@ -2,15 +2,18 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>勉強会のマッチング</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
         <div class="container">
             <a class="navbar-brand" href="/">ブログ</a>
             <ul class="navbar-nav ml-auto">
@@ -37,7 +40,7 @@
             </ul>
         </div>
     </nav>
-    
+
     <main>
         <div class="container">
             {% block content%}
@@ -45,7 +48,7 @@
         </div>
     </main>
 
-    <footer class="py-2 bg-dark">
+    <footer class="py-2 bg-primary">
         <p class="m-0 text-center text-white">Copyright &copy; LovePy 2022</p>
     </footer>
 
@@ -53,4 +56,5 @@
     {% endblock %}
 
 </body>
+
 </html>
