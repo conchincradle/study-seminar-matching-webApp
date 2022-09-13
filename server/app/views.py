@@ -12,6 +12,13 @@ class IndexView(View):
         return render(request, 'app/index.html',  {
             'post_data': post_data
         })
+        
+class IndexStudyView(View):
+    def get(self, request, *args, **kwargs):
+        post_data = Post.objects.order_by('-id')
+        return render(request, 'app/study_posts.html',  {
+            'post_data': post_data
+        })
 
 class PostDetailView(View):
     def get(self, request, *args, **kwargs):
