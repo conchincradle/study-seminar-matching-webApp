@@ -1,5 +1,11 @@
+
+*.DS_Store
+devcontainer.json
+docker-compose.yml
+
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*.log
+*.pyc
 *.py[cod]
 *$py.class
 
