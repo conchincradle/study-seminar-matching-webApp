@@ -10,7 +10,6 @@ class AccountUser(models.Model):
     sound_profile = models.CharField("サウンドURL", max_length=200)
     user_icon = models.CharField("アイコンURL", max_length=200)
     created = models.DateField("誕生日")
-    # email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # user_name = models.OneToOneField(User, on_delete=models.CASCADE)
 
 def __str__(self):
