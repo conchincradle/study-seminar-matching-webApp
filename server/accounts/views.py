@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.account import views
 
 class LoginView(views.LoginView):
@@ -14,3 +15,13 @@ class LogoutView(views.LogoutView):
 
 class SignupView(views.SignupView):
     template_name = 'accounts/signup.html'
+
+#LoginRequiredMixin ログイン必須
+class MypageView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'accounts/my_page.html' #仮
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['staff_list'] = Staff.objects.filter(user=self.request.user).order_by('name')
+        context['schedule_list'] = Schedule.objects.filter(staff__user=self.request.user, start__gte=timezone.now()).order_by('name')
+        return context

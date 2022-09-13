@@ -24,7 +24,7 @@ class AppComment(models.Model):
     def __str__(self):
         return self.created
 
-class AppSeminar:
+class AppSeminar(models.Model):
     content = models.TextField("本文")
     author_id = models.ForeignKey(AccountUser, related_name='author_id', on_delete=models.CASCADE)
     link = models.CharField("会議URL", max_length=200)
@@ -35,6 +35,6 @@ class AppSeminar:
         return self.title
 
 
-# class AppSeminarParticipant:
-#     user__id = models.ForeignKey(AccountUser,  on_delete=models.CASCADE)
-#     seminar_id = models.ForeignKey(AppSeminar, on_delete=models.CASCADE)
+class AppSeminarParticipant(models.Model):
+    user_id = models.ForeignKey(AccountUser,  on_delete=models.CASCADE)
+    seminar_id = models.ForeignKey(AppSeminar, on_delete=models.CASCADE)
