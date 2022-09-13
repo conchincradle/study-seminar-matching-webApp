@@ -4,6 +4,7 @@ devcontainer.json
 docker-compose.yml
 
 # Byte-compiled / optimized / DLL files
+*.cpython-39.pyc
 *.log
 *.pyc
 *.py[cod]
@@ -164,3 +165,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+server/accounts/__pycache__/__init__.cpython-39.pyc
+server/accounts/__pycache__/__init__.cpython-39.pyc
+server/accounts/__pycache__/views.cpython-39.pyc
+
