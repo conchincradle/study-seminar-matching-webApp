@@ -14,7 +14,6 @@
         </div>
         <div class="card-footer text-muted">
             {{ post_data.created|date }} by {{ post_data.author }}
-            <a href="/home" class="btn btn-danger">戻る</a>
         </div>
     </div>
 </div>
@@ -38,7 +37,7 @@
             <p>
                 <strong>
                     
-                    <small>{{comment.created}} by {{ comment.author }}</small>
+                    <small>{{comment.created}} by {{ comment.author_id }}</small>
                 </strong>
                 <br />
                 {{comment.content}}

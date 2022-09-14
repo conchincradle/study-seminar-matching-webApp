@@ -12,5 +12,5 @@ class AccountUser(models.Model):
     created = models.DateField("誕生日")
     # user_name = models.OneToOneField(User, on_delete=models.CASCADE)
 
-def __str__(self):
-        return self.user_name
+    def __str__(self):
+        return str(self.user_name)
