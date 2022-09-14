@@ -122,12 +122,12 @@ def save_file(request):
 def profile(request):
     return render(request,"accounts/profile.html")
 
-class ProfileView(View):
+class ProfileView(FormView):
 
     def get(self, request, *args, **kwargs):
         form = UserForm()
         # <view logic>
-        return render(request, 'accounts/profile.html',form)
+        return render(request, 'accounts/profile.html',{"form":form})
     def post(self,request, *args, **kwargs):
         form = UserForm(request.POST)
         # check whether it's valid:
@@ -135,15 +135,15 @@ class ProfileView(View):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
-            context = {}
-            context.user_icon = form.cleaned_data['user_icon']
-            context.birthday = form.cleaned_data['birthday']
-            context.profile = form.cleaned_data['profile']
-            context.sound_profile = form.cleaned_data['sound_profile']
-            print(context)
+            data= {}
+            data.user_icon = form.cleaned_data['user_icon']
+            data.birthday = form.cleaned_data['birthday']
+            data.profile = form.cleaned_data['profile']
+            data.sound_profile = form.cleaned_data['sound_profile']
+            print(data)
 
             # redirect to a new URL:
-            return render(request, 'accounts/mypage.html', context)
+            return render(request, 'accounts/mypage.html', context=data)
         else:
             print("nonvalid")
             return render(request, 'accounts/profile.html')

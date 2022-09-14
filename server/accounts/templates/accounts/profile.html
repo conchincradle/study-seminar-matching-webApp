@@ -18,11 +18,24 @@
 <form  method="post">
     {% csrf_token %}
     <div class="formpost">
-        {% render_field form.user_icon class="form-control" placeholder="タイトルを入力" %}
+        <label for="user_icon"><b>ユーザーアイコン</b></label>
+        {% render_field form.user_icon class="form-control" placeholder="タユーザーアイコンURL" %}
     </div>
     <div class="formpost">
-        {% render_field form.birthday class="form-control" placeholder="本文を入力" %}
+        <label for="birthday"><b>誕生日</b></label>
+        {% render_field form.birthday class="form-control" %}
     </div>
+      <div class="formpost">
+          <label for="profile">自己紹介</label>
+        {% render_field form.profile class="form-control" placeholder="私は…" %}
+    </div>
+
+      <div class="formpost">
+           <label for="sound_profile">音声紹介</label>
+        {% render_field form.sound_profile class="form-control" placeholder="音声紹介URL" %}
+    </div>
+
+
         <!--
     </div>
   <div class="formpost">
@@ -40,8 +53,8 @@
 
   </div>
      <div class="formpost">
-    <label for="sound_profile">音声紹介</label>
-    <input type="text" class="form-control" id="sound_profile" placeholder="音声紹介URL">
+
+    <input type="text" class="form-control" id="sound_profile" placeholder="">
   </div>
   -->
     <div aling="center">
