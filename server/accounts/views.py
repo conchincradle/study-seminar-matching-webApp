@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import ProfileEditForm
+from .models import Post
 from allauth.account import views
 
 class LoginView(views.LoginView):
@@ -20,8 +23,32 @@ class SignupView(views.SignupView):
 class MypageView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'accounts/my_page.html' #仮
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['staff_list'] = Staff.objects.filter(user=self.request.user).order_by('name')
-        context['schedule_list'] = Schedule.objects.filter(staff__user=self.request.user, start__gte=timezone.now()).order_by('name')
-        return context
+    def get(self, request, *args, **kwargs):
+        post_data = Post.objects.get(id=self.kwargs['pk'])
+        form = ProfileEditForm(
+            request.POST or None,
+            initial = {
+                'name': post_data.name,
+                'profile': post_data.profile,
+                'birthday':post_data.birthday
+            }
+        )
+
+        return render(request, 'app/post_form.html', {
+            'form': form
+        })
+    
+    def post(self, request, *args, **kwargs):
+        form = ProfileEditForm(request.POST or None)
+
+        if form.is_valid():
+            post_data = Post.objects.get(id=self.kwargs['pk'])
+            post_data.author = request.user
+            post_data.title = form.cleaned_data['title']
+            post_data.content = form.cleaned_data['content']
+            post_data.save()
+            return redirect('post_detail', post_data.id)
+        
+        return render(request, 'app/post_form.html', {
+            'form':form
+        })      
