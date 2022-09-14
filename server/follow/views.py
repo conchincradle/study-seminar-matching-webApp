@@ -10,8 +10,8 @@ from .models import FollowRelation
 class followings(View):
     def get(self, request, *args, **kwargs):
         target_user = AccountUser.objects.get(id=self.kwargs['user_id'])
-        relation = FollowRelation(user=target_user)
-        followings = relation.following.all()
+        relations = FollowRelation(user=target_user)
+        followings = relations.following.all()
         return render(request, "follow/followings.html", {'user_name': target_user.user_name, 'followings': followings})
 
 class followers(View):

@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="my-4">
-    <h3><a class="font-weight-bold text-dark" href="#">{ユーザー名}</a>さんのフォロー関係</h3>
+    <h3><a class="font-weight-bold text-dark" href="#">{{user_name}}</a>さんのフォロー関係</h3>
 </div>
 
 <ul class="nav nav-tabs text-center">
@@ -22,14 +22,14 @@
     </li>
 </ul>
 <div class="list-group">
-    {% for i in test_arr %}
+    {% for following in followings %}
     <a href="#" class="list-group-item list-group-item-action d-flex flex-row">
         <img class="col-1 p-2"
             src="https://4.bp.blogspot.com/-gKPdnJWscyI/VCIkF3Po4DI/AAAAAAAAmjo/fAKkTMyf8hM/s800/monster01.png">
         <div class="col-2 p-2 font-weight-bold"
             onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
             onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
-            まっちゃん
+            {{following}}
         </div>
         <div class="col-8 p-2">好きな食べ物はからあげです．よろしくお願いします．</div>
     </a>
@@ -38,18 +38,4 @@
 
 {% endblock %}
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>{{user_name}}さんがフォローしている人</h2>
-    {% for following in followings %}
-    <p>{{following}}</p>
-    {% endfor %}
-</body>
-</html> -->
+<p></p>
