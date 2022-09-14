@@ -1,9 +1,9 @@
 from django.urls import path
-from accounts import views
+# from follow import views
+from . import views
 
+# テスト用
 urlpatterns = [
-    path('login/', views.LoginView.as_view(), name='account_login'),
-    path('logout/', views.LogoutView.as_view(), name='account_logout'),
-    path('signup/', views.SignupView.as_view(), name='account_signup'),
-    path('follow_user/', views.SignupView.as_view(), name='follow_user'),
+    path('following/',views.following, name='following'),
+    path('followers/',views.followers, name='followers'),
 ]

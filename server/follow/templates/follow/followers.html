@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="my-4">
+    <h3><a class="font-weight-bold text-dark" href="#">{ユーザー名}</a>さんのフォロー関係</h3>
+</div>
+
+<ul class="nav nav-tabs text-center">
+    <li class="nav-item col-6 p-2">
+        <a class="nav-link text-muted border font-weight-bold" href="/follow/following"
+            onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
+            onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
+            フォロー中
+        </a>
+    </li>
+    <li class="nav-item col-6 p-2">
+        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers">
+            フォロワー
+        </a>
+    </li>
+</ul>
+<div class="list-group">
+    {% for i in test_arr %}
+    <a href="#" class="list-group-item list-group-item-action d-flex flex-row">
+        <img class="col-1 p-2"
+            src="https://1.bp.blogspot.com/-3GUksHO3Sgc/VCIkF-PenoI/AAAAAAAAmjk/by_uxGIO7hU/s800/monster02.png">
+        <div class="col-2 p-2 font-weight-bold"
+            onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
+            onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
+            はまちゃん
+        </div>
+        <div class="col-8 p-2">好きな食べ物は竜田揚げです．よろしくお願いします．</div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
