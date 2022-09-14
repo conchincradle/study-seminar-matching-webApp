@@ -2,19 +2,35 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<h2 class="my-5">フォロー中のユーザー</h2>
 
+<div class="mt-5">
+    <h2>{ユーザー名}さんのフォロー関係</h2>
+</div>
+
+<ul class="nav nav-tabs text-center mt-5">
+    <li class="nav-item col-6 p-2">
+        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/following">
+            フォロー中
+        </a>
+    </li>
+    <li class="nav-item col-6 p-2">
+        <a class="nav-link text-dark border font-weight-bold" href="/follow/followers">
+            フォロワー
+        </a>
+    </li>
+</ul>
 <div class="list-group">
     {% for i in test_arr %}
-        <a href="#" class="list-group-item list-group-item-action d-flex flex-row">
-            <img class="col-1 p-2" src="https://4.bp.blogspot.com/-gKPdnJWscyI/VCIkF3Po4DI/AAAAAAAAmjo/fAKkTMyf8hM/s800/monster01.png">
-            <div class="col-2 p-2 font-weight-bold"
-                onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
-                onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
-                まっちゃん
-            </div>
-            <div class="col-8 p-2">好きな食べ物はからあげです．よろしくお願いします．</div>
-        </a>
+    <a href="#" class="list-group-item list-group-item-action d-flex flex-row">
+        <img class="col-1 p-2"
+            src="https://4.bp.blogspot.com/-gKPdnJWscyI/VCIkF3Po4DI/AAAAAAAAmjo/fAKkTMyf8hM/s800/monster01.png">
+        <div class="col-2 p-2 font-weight-bold"
+            onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
+            onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
+            まっちゃん
+        </div>
+        <div class="col-8 p-2">好きな食べ物はからあげです．よろしくお願いします．</div>
+    </a>
     {% endfor %}
 </div>
 

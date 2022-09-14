@@ -5,4 +5,5 @@ from . import views
 # テスト用
 urlpatterns = [
     path('following/',views.following, name='following'),
+    path('followers/',views.followers, name='followers'),
 ]
