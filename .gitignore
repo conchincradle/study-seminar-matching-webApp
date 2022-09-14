@@ -1,3 +1,4 @@
+*.sqlite3
 
 *.DS_Store
 devcontainer.json
@@ -166,3 +167,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 *.cpython-39.pyc
+
+# VScode
+.vscode/

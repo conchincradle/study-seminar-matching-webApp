@@ -23,7 +23,7 @@
             {% block navi %}
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'post_new' %}">投稿</a>
+                    <a class="nav-link" href="{% url 'post_new' %}">マイページ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
