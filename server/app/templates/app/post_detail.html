@@ -36,7 +36,7 @@
 
 <!--　コメント投稿エリア -->
 <h2 class="subtitle" >コメントを追加</h2>
-<form action="." method="post_data">
+<form action="." method="post_detail">
     {% csrf_token %}
     {{form.as_p}}
     <div class="field">
