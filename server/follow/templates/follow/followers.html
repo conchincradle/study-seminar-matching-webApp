@@ -4,19 +4,19 @@
 {% block content %}
 
 <div class="my-4">
-    <h3><a class="font-weight-bold text-dark" href="#">{{ user_name }}</a>さんのフォロー関係</h3>
+    <h3><a class="font-weight-bold text-dark" href="#">{{ user.user_name }}</a>さんのフォロー関係</h3>
 </div>
 
 <ul class="nav nav-tabs text-center">
     <li class="nav-item col-6 p-2">
-        <a class="nav-link text-muted border font-weight-bold" href="/follow/followings/{{ user_id }}"
+        <a class="nav-link text-muted border font-weight-bold" href="/follow/followings/{{ user.id }}"
             onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
             onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
             フォロー中
         </a>
     </li>
     <li class="nav-item col-6 p-2">
-        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers{{ user_id }}">
+        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers{{ user.id }}">
             フォロワー
         </a>
     </li>
