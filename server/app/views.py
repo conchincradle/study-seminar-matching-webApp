@@ -35,6 +35,31 @@ class PostDetailView(View):
         return render(request, 'app/post_detail.html', {
             'post_data': post_data, 'form': form
         })
+    def post(self, request, *args, **kwargs):
+        post_data = PostForm(request.POST or None)
+
+        #  コメントを表示
+        if request.method == "POST":
+            comment = request.POST.get('content')
+            form = CommentForm(request.POST or None)
+            
+            if form.is_valid():
+                comment = form.save(commit=False)
+                print("c",comment)
+                print(post_data)
+                #comment.posted_id = post_data
+                #comment.save()
+                print("c",comment)
+                return redirect('post_detail', self.kwargs['pk'])
+                
+            print("ここ")
+        else:
+            form = CommentForm()
+            print("ここ1")
+
+        return render(request, 'app/post_detail.html', {
+            'post_data': post_data, 'form': form
+        })
 
 class CreatePostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
