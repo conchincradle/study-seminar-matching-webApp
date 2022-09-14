@@ -2,13 +2,23 @@
 
 {% block content %}
 
-<h2 class="my-4">{{ post_data.title }}</h2>
-<hr>
-<p>{{ post_data }} by {{ post_data.author }}</p>
-<hr>
-<p>{{ post_data.content|linebreaksbr }}</p>
+<div class= mt-sm-0>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ post_data.title }}
+            <hr>
+
+            <p class="card-text">{{ post_data.content|linebreaksbr }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post_data.created|date }} by {{ post_data.author }}
+        </div>
+    </div>
+</div>
 {% if user.is_authenticated %}
 
+
+<hr>
 <!--　コメントされたものを表示 -->
 <h2 class="subtitle">コメント</h2>
 
