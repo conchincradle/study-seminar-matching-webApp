@@ -15,24 +15,26 @@
         {% for post in post_data %}
         <div class="card mb-4">
             <div class="card-body">
-                <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="float-left rounded-circle">
-                <div class="col-ml-20">aaa{{ post.usericon }}bbb</div>
-                <div class="">
+                <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
+                <div class="mb-10">
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text">{{ post.content | truncatechars:100}}</p>
-                    <a href="{% url 'post_detail' post.id %}">
-                        <div class="btn btn-warning">
-                            詳細
-                        </div>
-                    </a>
+                </div>
+                
+                </div>
+                <div class="card-body">
+                <a href="{% url 'post_detail' post.id %}">
+                    <div class="btn btn-warning">
+                        詳細
+                    </div>
+                </a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ post.created|date }} by {{ post.author}}
                 </div>
             </div>
-            <div class="card-footer text-muted">
-                {{ post.created|date }} by {{ post.author}}
-            </div>
-        </div>
         {% endfor %}
-    </div>
+        </div>
 
     <div class="col-md-4">
         <div class="card mt-5">
