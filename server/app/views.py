@@ -13,6 +13,13 @@ class IndexView(View):
             'post_data': post_data
         })
 
+class IndexStudyView(View):
+    def get(self, request, *args, **kwargs):
+        post_data = Post.objects.order_by('-id')
+        return render(request, 'app/study_posts.html',  {
+            'post_data': post_data
+        })
+
 class PostDetailView(View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
@@ -74,7 +81,30 @@ class CreatePostView(LoginRequiredMixin, View):
         
         return render(request, 'app/post_form.html', {
             'form':form
-        })      
+        }) 
+class CreatePostStudyView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        form = PostForm(request.POST or None)
+
+        return render(request, 'app/post_form_study.html', {
+            'form':form
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = PostForm(request.POST or None)
+
+        if form.is_valid():
+            post_data = Post()
+            post_data.author = request.user
+            post_data.title = form.cleaned_data['title']
+            post_data.content = form.cleaned_data['content']
+            post_data.content = form.cleaned_data['url']
+            post_data.save()
+            return redirect('post_detail', post_data.id)
+        
+        return render(request, 'app/post_form_study.html', {
+            'form':form
+        })       
 
 
 class PostEditView(LoginRequiredMixin, View):
@@ -106,6 +136,7 @@ class PostEditView(LoginRequiredMixin, View):
         return render(request, 'app/post_form.html', {
             'form':form
         })   
+
 
 class PostDeleteView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
