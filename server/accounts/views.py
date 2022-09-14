@@ -6,6 +6,9 @@ from .models import AccountUser
 from django.views import generic
 from allauth.account import views
 from django.utils import timezone
+from .forms import UserForm
+from django.views.generic import View
+
 
 class LoginView(views.LoginView):
     template_name = 'accounts/login.html'
@@ -104,15 +107,43 @@ def userpage(request):
             }
     return render(request,'accounts/userpage.html',context)
 
+'''
 from django.core.files.base import ContentFile
-
-
-# test
-
 def save_file(request):
     mymodel = MyModel.objects.get(id=1)
-    # 读取上传的文件中的video项为二进制文件
+  
     file_content = ContentFile(request.FILES['video'].read())
-    # ImageField的save方法，第一个参数是保存的文件名，第二个参数是ContentFile对象，里面的内容是要上传的图片、视频的二进制内容
+ 
     mymodel.video.save(request.FILES['video'].name, file_content)
+'''
+
 ###### test zhu
+
+def profile(request):
+    return render(request,"accounts/profile.html")
+
+class ProfileView(View):
+
+    def get(self, request, *args, **kwargs):
+        form = UserForm()
+        # <view logic>
+        return render(request, 'accounts/profile.html',form)
+    def post(self,request, *args, **kwargs):
+        form = UserForm(request.POST)
+        # check whether it's valid:
+
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            context = {}
+            context.user_icon = form.cleaned_data['user_icon']
+            context.birthday = form.cleaned_data['birthday']
+            context.profile = form.cleaned_data['profile']
+            context.sound_profile = form.cleaned_data['sound_profile']
+            print(context)
+
+            # redirect to a new URL:
+            return render(request, 'accounts/mypage.html', context)
+        else:
+            print("nonvalid")
+            return render(request, 'accounts/profile.html')

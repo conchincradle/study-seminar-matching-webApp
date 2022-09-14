@@ -8,4 +8,5 @@ urlpatterns = [
     path('mypage/',views.mypage, name='account_mypage'),
     path('mypage/edit', views.ProfileUpdateView.as_view(), name='edit_page'),
     path('userpage/',views.userpage, name='account_userpage'),
+    path('profile/',views.ProfileView.as_view(), name='account_profile'),
 ]

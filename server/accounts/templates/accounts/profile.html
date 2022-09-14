@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "app/base.html" %}
+{% load widget_tweaks %}
+{% block navi %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">ログイン済</a>
+    </li>
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<div class="card card-auth my-5 mx-auto">
+    <div class="card body">
+        <h5 class="card-title text-center" ><b>プロファイル編集</b></h5>
+
+<form  method="post">
+    {% csrf_token %}
+    <div class="formpost">
+        {% render_field form.user_icon class="form-control" placeholder="タイトルを入力" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.birthday class="form-control" placeholder="本文を入力" %}
+    </div>
+        <!--
+    </div>
+  <div class="formpost">
+    <label for="user_icon">ユーザーアイコン</label>
+    <input type="text" class="form-control" id="user_icon" placeholder="ユーザーアイコンURL">
+  </div>
+     <div class="formpost">
+    <label for="birthday">誕生日</label>
+    <input type="date" class="form-control" id="birthday" >
+  </div>
+     <div class="formpost">
+         <label for="profile">自己紹介</label>
+          <textarea rows = "5" cols = "50" name = "description" id="profile" placeholder="私は…" >
+         </textarea>
+
+  </div>
+     <div class="formpost">
+    <label for="sound_profile">音声紹介</label>
+    <input type="text" class="form-control" id="sound_profile" placeholder="音声紹介URL">
+  </div>
+  -->
+    <div aling="center">
+        <button type="submit" class="btn btn-danger btn-lg" style="display:block;margin:0 auto">submit</button>
+
+    </div>
+
+
+
+</form>
+
+
+{% endblock %}
