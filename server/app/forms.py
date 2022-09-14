@@ -9,3 +9,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = AppComment
         fields = ['content']
+
+class PostStudyForm(forms.Form):
+    title = forms.CharField(max_length=30, label='タイトル')
+    content = forms.CharField(label='内容', widget=forms.Textarea())
+    link = forms.CharField(max_length=30, label='URL')

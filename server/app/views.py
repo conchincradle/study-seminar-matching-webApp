@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from requests import post
-from .models import Post, AppComment
-from .forms import PostForm, CommentForm
+from .models import Post, AppComment, AppSeminar
+from .forms import PostForm, CommentForm, PostStudyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # インデックスを表示
@@ -53,7 +53,7 @@ class PostDetailView(View):
             if form.is_valid():
                 comment = form.save(commit=False)
                 comment.posted_id = kwargs['pk']
-                comment.author_id = request.user
+                comment.author = request.user
                 comment.save()
                 return redirect('post_detail', self.kwargs['pk'])
 
@@ -61,7 +61,7 @@ class PostDetailView(View):
             'post_data': post_data, 'form': form
         })
 
-
+#   タイムラインの投稿
 class CreatePostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
@@ -84,6 +84,8 @@ class CreatePostView(LoginRequiredMixin, View):
         return render(request, 'app/post_form.html', {
             'form':form
         }) 
+
+#  勉強会の投稿
 class CreatePostStudyView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         form = PostForm(request.POST or None)
@@ -93,14 +95,14 @@ class CreatePostStudyView(LoginRequiredMixin, View):
         })
 
     def post(self, request, *args, **kwargs):
-        form = PostForm(request.POST or None)
+        form = PostStudyForm(request.POST or None)
 
         if form.is_valid():
-            post_data = Post()
+            post_data = AppSeminar()
             post_data.author = request.user
             post_data.title = form.cleaned_data['title']
             post_data.content = form.cleaned_data['content']
-            post_data.content = form.cleaned_data['url']
+            post_data.link = form.cleaned_data['link']
             post_data.save()
             return redirect('post_detail', post_data.id)
         

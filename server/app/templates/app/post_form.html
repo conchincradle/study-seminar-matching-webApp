@@ -10,7 +10,7 @@
 <form method="post" class="mb-4">
     {% csrf_token %}
     <div class="mb-4">
-        <a class="btn btn-warning" href="/post/study/new/"">勉強会の主催する際はこちら</a>
+        <a class="btn btn-warning" href="/post/study/new/">勉強会の主催する際はこちら</a>
     </div>
     <div class=" formpost">
             {% render_field form.title class="form-control" placeholder="タイトルを入力" %}
@@ -20,7 +20,7 @@
     </div>
 
     <button class="btn btn-warning mb-4" type="submit">投稿する</button>
-    <div class="" />
+    <div class="">
 </form>
 
 {% endblock %}
