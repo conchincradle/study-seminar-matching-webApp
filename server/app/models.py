@@ -17,7 +17,7 @@ class Post(models.Model):
 class AppComment(models.Model):
     content = models.TextField()
     created = models.DateTimeField(default=timezone.now)
-    author_id = models.ForeignKey(AccountUser, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     posted = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     
 

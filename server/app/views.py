@@ -45,6 +45,7 @@ class PostDetailView(View):
         
     def post(self, request, *args, **kwargs):
         post_data = PostForm(request.POST or None)
+
         #  コメントを表示
         if request.method == "POST":
             form = CommentForm(request.POST or None)
@@ -52,6 +53,7 @@ class PostDetailView(View):
             if form.is_valid():
                 comment = form.save(commit=False)
                 comment.posted_id = kwargs['pk']
+                comment.author_id = request.user
                 comment.save()
                 return redirect('post_detail', self.kwargs['pk'])
 
