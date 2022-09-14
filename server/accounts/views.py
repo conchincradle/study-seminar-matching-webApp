@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import View, UpdateView
+from django.views.generic import View, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileEditForm
 from .models import AccountUser
@@ -21,46 +21,62 @@ class LogoutView(views.LogoutView):
 class SignupView(views.SignupView):
     template_name = 'accounts/signup.html'
 
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-    model = AccountUser
-    form_class = ProfileEditForm
+# class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+#     model = AccountUser
+#     form_class = ProfileEditForm
+#     template_name = 'accounts/post_form.html'
+class ProfileUpdateView(LoginRequiredMixin, FormView):
     template_name = 'accounts/post_form.html'
-    slug_field = 'user_name'
-    slug_url_kwarg = 'user_name'
-
-#LoginRequiredMixin ログイン必須
-# class MypageView(LoginRequiredMixin, generic.TemplateView):
-#     template_name = 'accounts/my_page.html' #仮
-
-#     def get(self, request, *args, **kwargs):
-#         post_data = AccountUser.objects.get(id=self.kwargs['pk'])
-#         form = ProfileEditForm(
-#             request.POST or None,
-#             initial = {
-#                 'name': post_data.name,
-#                 'profile': post_data.profile,
-#                 'birthday':post_data.birthday
-#             }
-#         )
-
-#         return render(request, 'accounts/post_form.html', {
-#             'form': form
-#         })
+    form_class = ProfileEditForm
+    # success_url = reverse_lazy('accounts:profile')
     
-#     def post(self, request, *args, **kwargs):
-#         form = ProfileEditForm(request.POST or None)
+    def form_valid(self, form):
+        #formのupdateメソッドにログインユーザーを渡して更新
+        form.update(user=self.request.user)
+        return super().form_valid(form)
 
-#         if form.is_valid():
-#             post_data = AccountUser.objects.get(id=self.kwargs['pk'])
-#             post_data.author = request.user
-#             post_data.title = form.cleaned_data['title']
-#             post_data.content = form.cleaned_data['content']
-#             post_data.save()
-#             return redirect('post_detail', post_data.id)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        # 更新前のユーザー情報をkwargsとして渡す
+        kwargs.update({
+            'user_name' : self.request.user.user_name,
+            'profile' : self.request.user.profile,
+            'birthday' : self.request.user.birthday,
+        })
+        return kwargs
+#LoginRequiredMixin ログイン必須
+class MypageView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'accounts/my_page.html' #仮
+
+    def get(self, request, *args, **kwargs):
+        post_data = AccountUser.objects.get(id=self.kwargs['pk'])
+        form = ProfileEditForm(
+            request.POST or None,
+            initial = {
+                'name': post_data.name,
+                'profile': post_data.profile,
+                'birthday':post_data.birthday
+            }
+        )
+
+        return render(request, 'accounts/post_form.html', {
+            'form': form
+        })
+    
+    def post(self, request, *args, **kwargs):
+        form = ProfileEditForm(request.POST or None)
+
+        if form.is_valid():
+            post_data = AccountUser.objects.get(id=self.kwargs['pk'])
+            post_data.author = request.user
+            post_data.title = form.cleaned_data['title']
+            post_data.content = form.cleaned_data['content']
+            post_data.save()
+            return redirect('post_detail', post_data.id)
         
-#         return render(request, 'accounts/post_form.html', {
-#             'form':form
-#         })      
+        return render(request, 'accounts/post_form.html', {
+            'form':form
+        })      
 # mypage test-Zhu
 def mypage(request):
     context = {

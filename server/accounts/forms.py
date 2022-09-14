@@ -13,15 +13,21 @@ from .models import AccountUser
 #         return self.name
 
 class ProfileEditForm(forms.ModelForm):
-    user_name = forms.CharField(max_length=50, label='名前')
-    profile = forms.CharField(label='自己紹介', widget=forms.Textarea())
-    birthday = forms.DateField(label="生年月日")
+    # user_name = forms.CharField(max_length=50, label='名前')
+    # profile = forms.CharField(label='自己紹介', widget=forms.Textarea())
+    # birthday = forms.DateField(label="生年月日")
     #icon = forms.ImageField(upload_to='???')
 
     class Meta:
         model = AccountUser
-        fields = ('iuser_name', 'profile', 'birthday')
+        fields = ('user_name', 'profile', 'birthday')
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.get('instance', None)
         super().__init__(*args, **kwargs)
+
+    def update(self, user):
+        user.user_name = self.cleaned_data['user_name']
+        user.profile = self.cleaned_data['profile']
+        user.birthday = self.cleaned_data['birthday']
+        user.save()
