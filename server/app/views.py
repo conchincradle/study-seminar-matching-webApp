@@ -37,28 +37,13 @@ class PostDetailView(View):
         })
     def post(self, request, *args, **kwargs):
         post_data = PostForm(request.POST or None)
-
         #  コメントを表示
         if request.method == "POST":
             form = CommentForm(request.POST or None)
 
             if form.is_valid():
                 comment = form.save(commit=False)
-                print(request.user)
-
-
-                #comment.posted_id = 321
-                import pprint
-                pprint.pprint(vars(request))
-                pprint.pprint(vars(comment))
-                """
-                {'_state': <django.db.models.base.ModelState object at 0x7f8edb078430>,
-                'author_id': None,
-                'content': 'aaaa',
-                'created': datetime.datetime(2022, 9, 14, 2, 9, 4, 950662, tzinfo=<UTC>),
-                'id': None,
-                'posted_id_id': None}
-                """
+                comment.posted_id = kwargs['pk']
                 comment.save()
                 return redirect('post_detail', self.kwargs['pk'])
 
