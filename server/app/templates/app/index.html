@@ -1,31 +1,45 @@
 {% extends "app/base.html" %}
 
 {% block content %}
+
 <div class="row my-4">
     <div class="col-md-8">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/home">タイムライン</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/home/study">開催予定の勉強会</a>
+            </li>
+        </ul>
         {% for post in post_data %}
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{ post.title}}</h2>
+        <div class="card mb-4">
+            <div class="card-body">
+                <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
+                <div class="mb-10">
+                    <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text">{{ post.content | truncatechars:100}}</p>
-                    <div class="btn btn-warning">詳細</div>
+                </div>
+                
+                </div>
+                <div class="card-body">
+                <a href="{% url 'post_detail' post.id %}">
+                    <div class="btn btn-warning">
+                        詳細
+                    </div>
+                </a>
                 </div>
                 <div class="card-footer text-muted">
                     {{ post.created|date }} by {{ post.author}}
                 </div>
-                <a href="{% url 'post_detail' post.id %}" class="stretched-link"></a>
             </div>
         {% endfor %}
-    </div>
+        </div>
 
     <div class="col-md-4">
-        <div class="card">
-            <h5 class="card-header">この勉強会サイトについて</h5>
-            <div class="card-body">
-                <p>ステップ1</p>
-                <p class="mb-0">
-                    初めての投稿
-                </p>
+        <div class="card mt-5">
+            <div class="card-body text-center">
+                <a class=" btn btn-warning" href="/post/new">新規投稿</a>
             </div>
         </div>
     </div>
