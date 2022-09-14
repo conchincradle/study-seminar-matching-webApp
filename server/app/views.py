@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from requests import post
-from .models import Post
+from .models import Post, AppComment
 from .forms import PostForm, CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -22,12 +22,12 @@ class PostDetailView(View):
         if request.method == "POST":
             form = CommentForm(request.POST or None)
 
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.posted_id = post_data
-                comment.save()
+            # if form.is_valid():
+            #     comment = form.save(commit=False)
+            #     comment.posted_id = post_data
+            #     comment.save()
                 
-                return redirect('post_detail', self.kwargs['pk'])
+            #     return redirect('post_detail', self.kwargs['pk'])
         
         else:
             form = CommentForm()
@@ -35,6 +35,7 @@ class PostDetailView(View):
         return render(request, 'app/post_detail.html', {
             'post_data': post_data, 'form': form
         })
+        
     def post(self, request, *args, **kwargs):
         post_data = PostForm(request.POST or None)
         #  コメントを表示
@@ -47,12 +48,10 @@ class PostDetailView(View):
                 comment.save()
                 return redirect('post_detail', self.kwargs['pk'])
 
-        else:
-            form = CommentForm()
-
         return render(request, 'app/post_detail.html', {
             'post_data': post_data, 'form': form
         })
+
 
 class CreatePostView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -76,6 +75,7 @@ class CreatePostView(LoginRequiredMixin, View):
         return render(request, 'app/post_form.html', {
             'form':form
         })      
+
 
 class PostEditView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
