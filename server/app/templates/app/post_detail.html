@@ -8,10 +8,48 @@
 <hr>
 <p>{{ post_data.content|linebreaksbr }}</p>
 {% if user.is_authenticated %}
+
+<!--　コメントされたものを表示 -->
+<h2 class="subtitle">コメント</h2>
+
+{% for comment in post_data.comments.all %}
+<article class="media">
+    <div class="media-content">
+        <div class="content">
+            <p>
+                <strong>
+                    <!-- {{comment.name}} -->
+                    <small>{{comment.created}}</small>
+                </strong>
+                <br />
+                {{comment.content}}
+            </p>
+        </div>
+    </div>
+</article>
+{% empty %}
+<div class="notification">
+    <p>コメントはまだありません</p>
+</div>
+<hr>
+{% endfor%}
+
+<!--　コメント投稿エリア -->
+<h2 class="subtitle" >コメントを追加</h2>
+<form action="." method="post_data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="field">
+        <div class="control">
+            <button class="btn btn-danger">送信</button>
+        </div>
+    </div>
+</form>
+
     <hr>
     <div class="d-flex mb-5">
         <a href="{% url 'post_edit' post_data.id %}" class="btn btn-warning mr-2">編集する</a>
-        <a href="{% url 'post_delete' post_data.id %}"" class="btn btn-danger">削除する</a>
+        <a href="{% url 'post_delete' post_data.id %}" class="btn btn-danger">削除する</a>
     </div>
 {% endif %}
 

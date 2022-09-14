@@ -21,8 +21,6 @@ class AppComment(models.Model):
     author_id = models.ForeignKey(AccountUser, on_delete=models.CASCADE)
     posted_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     
-    def __str__(self):
-        return self.created
 
 class AppSeminar(models.Model):
     content = models.TextField("本文")

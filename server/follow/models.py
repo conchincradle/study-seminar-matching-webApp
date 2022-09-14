@@ -7,3 +7,4 @@ from accounts.models import AccountUser
 class FollowRelation(models.Model):
     following = models.ForeignKey(AccountUser, related_name='following', on_delete=models.CASCADE)
     follower = models.ForeignKey(AccountUser, related_name='follower', on_delete=models.CASCADE)
+
