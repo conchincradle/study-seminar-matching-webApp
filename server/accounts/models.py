@@ -15,3 +15,9 @@ class AccountUser(models.Model):
 
 def __str__(self):
         return self.user_name
+
+# test
+class MyModel(models.Model):
+    name = models.CharField(max_length=150,null=True)
+    video = models.ImageField(upload_to='images',max_length=255)
+# test zhu
