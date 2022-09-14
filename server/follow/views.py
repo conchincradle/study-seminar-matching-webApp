@@ -1,3 +1,21 @@
 from django.shortcuts import render
+from django.views.generic import View
 
-# Create your views here.
+from accounts.models import AccountUser
+from .models import FollowRelation
+
+
+
+
+class followings(View):
+    def get(self, request, *args, **kwargs):
+        target_user = AccountUser.objects.get(id=self.kwargs['user_id'])
+        relation = FollowRelation(user=target_user)
+        followings = relation.following.all()
+        return render(request, "follow/followings.html", {'user_name': target_user.user_name, 'followings': followings})
+
+class followers(View):
+    def get(self, request, *args, **kwargs):
+        target_user = AccountUser.objects.get(id=self.kwargs['user_id'])
+        followers = target_user.followed_by.all()
+        return render(request, "follow/followers.html", {'user_name': target_user.user_name,'followers': followers})
