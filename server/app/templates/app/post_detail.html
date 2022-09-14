@@ -39,9 +39,9 @@
 <form action="." method="post_detail">
     {% csrf_token %}
     {{form.as_p}}
-    <div class="field">
-        <div class="control">
-            <button class="btn btn-danger">送信</button>
+    <div class="formpost">
+        <div class="formpost">
+            <button class="btn btn-danger", type="submit">送信</button>
         </div>
     </div>
 </form>

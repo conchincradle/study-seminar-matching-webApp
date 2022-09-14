@@ -22,12 +22,12 @@ class PostDetailView(View):
         if request.method == "POST":
             form = CommentForm(request.POST or None)
 
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.posted_id = post_data
-                comment.save()
+            # if form.is_valid():
+            #     comment = form.save(commit=False)
+            #     comment.posted_id = post_data
+            #     comment.save()
                 
-                return redirect('post_detail', self.kwargs['pk'])
+            #     return redirect('post_detail', self.kwargs['pk'])
         
         else:
             form = CommentForm()
@@ -35,35 +35,32 @@ class PostDetailView(View):
         return render(request, 'app/post_detail.html', {
             'post_data': post_data, 'form': form
         })
+        
     def post(self, request, *args, **kwargs):
         post_data = PostForm(request.POST or None)
+        form = CommentForm(request.POST or None)
+        import pprint
+        pprint.pprint('aaaaaaaaaaaa')
 
-        #  コメントを表示
-        if request.method == "POST":
-            form = CommentForm(request.POST or None)
-
-            if form.is_valid():
-                comment = form.save(commit=False)
-                print(request.user)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            print(request.user)
 
 
-                #comment.posted_id = 321
-                import pprint
-                pprint.pprint(vars(request))
-                pprint.pprint(vars(comment))
-                """
-                {'_state': <django.db.models.base.ModelState object at 0x7f8edb078430>,
-                'author_id': None,
-                'content': 'aaaa',
-                'created': datetime.datetime(2022, 9, 14, 2, 9, 4, 950662, tzinfo=<UTC>),
-                'id': None,
-                'posted_id_id': None}
-                """
-                comment.save()
-                return redirect('post_detail', self.kwargs['pk'])
-
-        else:
-            form = CommentForm()
+            #comment.posted_id = 321
+            import pprint
+            pprint.pprint(vars(request))
+            pprint.pprint(vars(comment))
+            """
+            {'_state': <django.db.models.base.ModelState object at 0x7f8edb078430>,
+            'author_id': None,
+            'content': 'aaaa',
+            'created': datetime.datetime(2022, 9, 14, 2, 9, 4, 950662, tzinfo=<UTC>),
+            'id': None,
+            'posted_id_id': None}
+            """
+            comment.save()
+            return redirect('post_detail', self.kwargs['pk'])
 
         return render(request, 'app/post_detail.html', {
             'post_data': post_data, 'form': form

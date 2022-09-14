@@ -6,6 +6,5 @@ class PostForm(forms.Form):
     content = forms.CharField(label='内容', widget=forms.Textarea())
 
 class CommentForm(forms.ModelForm):
-    class Meta:
         model = AppComment
         fields = ['content', 'author_id']
