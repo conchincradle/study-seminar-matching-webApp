@@ -1,15 +1,22 @@
 from django.shortcuts import render
+from django.views.generic import View
 
-##### テスト用 ####
-test_data = {
-    'test_arr': range(6),
-}
+from accounts.models import AccountUser
+from .models import FollowRelation
 
-def following(request):
-    data = {'success':0}
-    return render(request,'follow/following.html', test_data)
 
-def followers(request):
-    data = {'success':0}
-    return render(request,'follow/followers.html', test_data)
-#### テスト用 ここまで ####
+
+
+class followings(View):
+    def get(self, request, *args, **kwargs):
+        target_user = AccountUser.objects.get(id=self.kwargs['user_id'])
+        relations = FollowRelation(user=target_user)
+        followings = relations.following.all()
+        return render(request, "follow/followings.html", {'user': target_user, 'followings': followings})
+
+class followers(View):
+    def get(self, request, *args, **kwargs):
+        target_user = AccountUser.objects.get(id=self.kwargs['user_id'])
+        followers = target_user.followed_by.all()
+        return render(request, "follow/followers.html", {'user': target_user, 'followers': followers})
+

@@ -13,5 +13,5 @@ class AccountUser(models.Model):
     # email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # user_name = models.OneToOneField(User, on_delete=models.CASCADE)
 
-def __str__(self):
-        return self.user_name
+    def __str__(self):
+        return str(self.user_name)

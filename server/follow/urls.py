@@ -1,9 +1,11 @@
 from django.urls import path
-# from follow import views
-from . import views
+
+from follow import views
+
 
 # テスト用
 urlpatterns = [
-    path('following/',views.following, name='following'),
-    path('followers/',views.followers, name='followers'),
+    path('followings/<int:user_id>', views.followings.as_view(), name='followings'),
+    path('followers/<int:user_id>', views.followers.as_view(), name='followers'),
 ]
+
