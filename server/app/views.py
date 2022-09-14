@@ -1,3 +1,5 @@
+from os import link
+from re import A
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from requests import post
@@ -130,13 +132,13 @@ class CreatePostStudyView(LoginRequiredMixin, View):
             post_data.content = form.cleaned_data['content']
             post_data.link = form.cleaned_data['link']
             post_data.save()
-            return redirect('post_detail', post_data.id)
+            return redirect('post_study_detail', post_data.id)
         
         return render(request, 'app/post_form_study.html', {
             'form':form
         })       
 
-
+#   投稿の編集
 class PostEditView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
@@ -167,7 +169,7 @@ class PostEditView(LoginRequiredMixin, View):
             'form':form
         })   
 
-
+#   投稿の削除
 class PostDeleteView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
@@ -180,6 +182,53 @@ class PostDeleteView(LoginRequiredMixin, View):
         post_data.delete()
         return redirect('index')
 
+#   勉強会投稿の編集
+class PostStudyEditView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
+        form = PostStudyForm(
+            request.POST or None,
+            initial = {
+                'title': post_data.title,
+                'content': post_data.content,
+                'link': post_data.link
+            }
+        )
+
+        return render(request, 'app/post_form_study.html', {
+            'form': form
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = PostStudyForm(request.POST or None)
+
+        if form.is_valid():
+            post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
+            post_data.author = request.user
+            post_data.title = form.cleaned_data['title']
+            post_data.content = form.cleaned_data['content']
+            post_data.save()
+            return redirect('post_study_detail', self.kwargs['pk'])
+        
+        return render(request, 'app/post_form_study.html', {
+            'form':form
+        })   
+
+#   勉強会投稿の削除
+class PostStudyDeleteView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
+        return render(request, 'app/post_study_delete.html', {
+            'post_data': post_data
+        })
+
+    def post(self, request, *args, **kwargs):
+        post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
+        post_data.delete()
+        return redirect('index')
+
+
+#   リンクの詳細
 class PostStudyLinkView(View):
     def get(self, request, *args, **kwargs):
         post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
