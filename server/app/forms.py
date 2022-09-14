@@ -1,5 +1,5 @@
 from django import forms
-from .models import AppComment
+from .models import AppComment, StudyComment
 
 class PostForm(forms.Form):
     title = forms.CharField(max_length=30, label='タイトル')
@@ -8,6 +8,11 @@ class PostForm(forms.Form):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = AppComment
+        fields = ['content']
+
+class CommentStudyForm(forms.ModelForm):
+    class Meta:
+        model = StudyComment
         fields = ['content']
 
 class PostStudyForm(forms.Form):

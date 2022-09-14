@@ -12,14 +12,7 @@ class Post(models.Model):
     created = models.DateTimeField("作成日", default=timezone.now)
 
     def __str__(self):
-        return self.title
-
-class AppComment(models.Model):
-    content = models.TextField()
-    created = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    posted = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    
+        return self.title    
 
 class AppSeminar(models.Model):
     content = models.TextField("本文")
@@ -31,7 +24,19 @@ class AppSeminar(models.Model):
     def __str__(self):
         return self.title
 
+class AppComment(models.Model):
+    content = models.TextField()
+    created = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    posted = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+
+class StudyComment(models.Model):
+    content = models.TextField()
+    created = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    posted = models.ForeignKey(AppSeminar, related_name="comments", on_delete=models.CASCADE)
 
 class AppSeminarParticipant(models.Model):
     user = models.ForeignKey(AccountUser,  on_delete=models.CASCADE)
     seminar = models.ForeignKey(AppSeminar, on_delete=models.CASCADE)
+
