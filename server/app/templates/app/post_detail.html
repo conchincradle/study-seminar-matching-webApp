@@ -2,13 +2,23 @@
 
 {% block content %}
 
-<h2 class="my-4">{{ post_data.title }}</h2>
-<hr>
-<p>{{ post_data }} by {{ post_data.author }}</p>
-<hr>
-<p>{{ post_data.content|linebreaksbr }}</p>
+<div class= mt-sm-0>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ post_data.title }}
+            <hr>
+
+            <p class="card-text">{{ post_data.content|linebreaksbr }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post_data.created|date }} by {{ post_data.author }}
+        </div>
+    </div>
+</div>
 {% if user.is_authenticated %}
 
+
+<hr>
 <!--　コメントされたものを表示 -->
 <h2 class="subtitle">コメント</h2>
 
@@ -35,22 +45,22 @@
 {% endfor%}
 
 <!--　コメント投稿エリア -->
-<h2 class="subtitle" >コメントを追加</h2>
-<form action="." method="post_detail">
-    {% csrf_token %}
+<h2 class="subtitle">コメントを追加</h2>
+<form action="" method="post">{% csrf_token %}
     {{form.as_p}}
     <div class="formpost">
         <div class="formpost">
             <button class="btn btn-danger", type="submit">送信</button>
+
         </div>
     </div>
 </form>
 
-    <hr>
-    <div class="d-flex mb-5">
-        <a href="{% url 'post_edit' post_data.id %}" class="btn btn-warning mr-2">編集する</a>
-        <a href="{% url 'post_delete' post_data.id %}" class="btn btn-danger">削除する</a>
-    </div>
+<hr>
+<div class="d-flex mb-5">
+    <a href="{% url 'post_edit' post_data.id %}" class="btn btn-warning mr-2">編集する</a>
+    <a href="{% url 'post_delete' post_data.id %}" class="btn btn-danger">削除する</a>
+</div>
 {% endif %}
 
 {% endblock %}
