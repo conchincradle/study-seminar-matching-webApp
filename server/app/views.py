@@ -80,7 +80,7 @@ class PostStudyDetailView(View):
                 comment.posted_id = kwargs['pk']
                 comment.author = request.user
                 comment.save()
-                return redirect('post_detail', self.kwargs['pk'])
+                return redirect('post_study_detail', self.kwargs['pk'])
 
         return render(request, 'app/post_detail_study.html', {
             'post_data': post_data, 'form': form
@@ -179,3 +179,12 @@ class PostDeleteView(LoginRequiredMixin, View):
         post_data = Post.objects.get(id=self.kwargs['pk'])
         post_data.delete()
         return redirect('index')
+
+class PostStudyLinkView(View):
+    def get(self, request, *args, **kwargs):
+        post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
+        
+        return render(request, 'app/post_detail_study_link.html', {
+            'post_data': post_data,
+        })
+        

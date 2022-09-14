@@ -11,6 +11,7 @@
             <hr>
 
             <p class="card-text">{{ post_data.content|linebreaksbr }}</p>
+            <a href="{% url 'study_participate' post_data.id %}" class="btn btn-warning mr-2">参加</a>
         </div>
         <div class="card-footer text-muted">
             {{ post_data.created|date }} by {{ post_data.author }}
