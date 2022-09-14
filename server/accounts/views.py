@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProfileEditForm
-from .models import Post
+from .models import AccountUser
+from django.views import generic
 from allauth.account import views
 from django.utils import timezone
 
@@ -25,7 +26,7 @@ class MypageView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'accounts/my_page.html' #仮
 
     def get(self, request, *args, **kwargs):
-        post_data = Post.objects.get(id=self.kwargs['pk'])
+        post_data = AccountUser.objects.get(id=self.kwargs['pk'])
         form = ProfileEditForm(
             request.POST or None,
             initial = {
@@ -35,7 +36,7 @@ class MypageView(LoginRequiredMixin, generic.TemplateView):
             }
         )
 
-        return render(request, 'app/post_form.html', {
+        return render(request, 'accounts/post_form.html', {
             'form': form
         })
     
@@ -43,14 +44,14 @@ class MypageView(LoginRequiredMixin, generic.TemplateView):
         form = ProfileEditForm(request.POST or None)
 
         if form.is_valid():
-            post_data = Post.objects.get(id=self.kwargs['pk'])
+            post_data = AccountUser.objects.get(id=self.kwargs['pk'])
             post_data.author = request.user
             post_data.title = form.cleaned_data['title']
             post_data.content = form.cleaned_data['content']
             post_data.save()
             return redirect('post_detail', post_data.id)
         
-        return render(request, 'app/post_form.html', {
+        return render(request, 'accounts/post_form.html', {
             'form':form
         })      
 # mypage test-Zhu
