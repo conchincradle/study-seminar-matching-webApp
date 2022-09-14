@@ -17,8 +17,8 @@ class Post(models.Model):
 
 class AppComment(models.Model):
     content = models.TextField("コメント内容")
-    created = models.DateTimeField("作成日", default=timezone.now)
-    author_id = models.ForeignKey(AccountUser, on_delete=models.CASCADE)
+    #created = models.DateTimeField("作成日", default=timezone.now)
+    #author = models.ForeignKey(AccountUser, on_delete=models.CASCADE)
     posted_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     
 
