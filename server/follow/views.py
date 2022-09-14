@@ -19,3 +19,4 @@ class followers(View):
         target_user = AccountUser.objects.get(id=self.kwargs['user_id'])
         followers = target_user.followed_by.all()
         return render(request, "follow/followers.html", {'user': target_user, 'followers': followers})
+
