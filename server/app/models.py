@@ -14,12 +14,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
 class AppComment(models.Model):
-    content = models.TextField("コメント内容")
-    #created = models.DateTimeField("作成日", default=timezone.now)
-    #author = models.ForeignKey(AccountUser, on_delete=models.CASCADE)
-    posted_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
+    created = models.DateTimeField(default=timezone.now)
+    author_id = models.ForeignKey(AccountUser, on_delete=models.CASCADE)
+    posted = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     
 
 class AppSeminar(models.Model):
