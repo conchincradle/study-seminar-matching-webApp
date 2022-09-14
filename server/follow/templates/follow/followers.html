@@ -9,14 +9,14 @@
 
 <ul class="nav nav-tabs text-center">
     <li class="nav-item col-6 p-2">
-        <a class="nav-link text-muted border font-weight-bold" href="/follow/following"
+        <a class="nav-link text-muted border font-weight-bold" href="/follow/followings/{{ user_id }}"
             onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
             onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
             フォロー中
         </a>
     </li>
     <li class="nav-item col-6 p-2">
-        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers">
+        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers{{ user_id }}">
             フォロワー
         </a>
     </li>
