@@ -15,7 +15,8 @@
         {% for post in post_data %}
         <div class="card mb-4">
             <div class="card-body">
-                <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
+                <a href="{% url 'post_detail' post.author_id %}">
+                <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/></a>
                 <div class="mb-10">
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text">{{ post.content | truncatechars:100}}</p>
