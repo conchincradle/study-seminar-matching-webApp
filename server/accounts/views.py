@@ -65,7 +65,9 @@ class MypageView(LoginRequiredMixin, View):
         print(AccountUser.objects.values())
         print("-------------------------------")
         print(AccountUser.objects.values())
-        post_data = AccountUser.objects.get(user_name=user.pk)
+
+
+        post_data, created = AccountUser.objects.get_or_create(user_name_id=user.id,birthday=timezone.now(),user_icon='111111111',sound_profile='1111111',profile='編集をお願いします！')
         print(post_data)
         sedai = self.calculate_age(post_data.birthday)
         context={
