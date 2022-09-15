@@ -3,7 +3,7 @@ from re import A
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from requests import post
-from .models import Post, AppComment, AppSeminar
+from .models import Post, AppComment, AppSeminar, AppSeminarParticipant
 from .forms import PostForm, CommentForm, PostStudyForm, CommentStudyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -15,8 +15,10 @@ class IndexView(View):
             'post_data': post_data
         })
 
+
 class IndexStudyView(View):
     def get(self, request, *args, **kwargs):
+        """自分の投稿と，フォローしているユーザーの投稿のみmを返す"""
         post_data = AppSeminar.objects.order_by('-id')
         return render(request, 'app/study_posts.html',  {
             'post_data': post_data
@@ -47,7 +49,7 @@ class PostDetailView(View):
             if form.is_valid():
                 comment = form.save(commit=False)
                 comment.posted_id = kwargs['pk']
-                comment.author_id = request.user
+                comment.author = request.user
                 comment.save()
                 return redirect('post_detail', self.kwargs['pk'])
 
@@ -63,14 +65,6 @@ class PostStudyDetailView(View):
         #  コメントを表示
         if request.method == "POST":
             form = CommentForm(request.POST or None)
-
-            # if form.is_valid():
-            #     comment = form.save(commit=False)
-            #     comment.posted_id = post_data
-            #     comment.save()
-                
-            #     return redirect('post_detail', self.kwargs['pk'])
-        
         else:
             form = CommentForm()
 
@@ -273,8 +267,20 @@ class PostStudyDeleteView(LoginRequiredMixin, View):
 class PostStudyLinkView(View):
     def get(self, request, *args, **kwargs):
         post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
-        
+
+        participate_data = AppSeminarParticipant()
+        participate_data.user = request.user
+        participate_data.seminar = AppSeminar.objects.get(id=self.kwargs['pk'])
+        participate_data.save()
+
         return render(request, 'app/post_detail_study_link.html', {
-            'post_data': post_data,
+            'post_data': post_data
         })
-        
+
+    def post(self, request, *args, **kwargs):
+        post_data = AppSeminarParticipant()
+        post_data.user = request.user
+        post_data.seminar = AppSeminar.objects.get(id=self.kwargs['pk'])
+        post_data.save()
+
+        return redirect('post_detail', self.kwargs['pk'])

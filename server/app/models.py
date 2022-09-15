@@ -37,6 +37,6 @@ class StudyComment(models.Model):
     posted = models.ForeignKey(AppSeminar, related_name="comments", on_delete=models.CASCADE)
 
 class AppSeminarParticipant(models.Model):
-    user = models.ForeignKey(AccountUser,  on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     seminar = models.ForeignKey(AppSeminar, on_delete=models.CASCADE)
 
