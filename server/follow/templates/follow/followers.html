@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="my-4">
-    <h3><a class="font-weight-bold text-dark" href="#">{{ user.username }}</a>さんのフォロー関係</h3>
+    <h3><a class="font-weight-bold text-dark" href="#">{{ target_user.user_name }}</a>さんのフォロー関係</h3>
 </div>
 
 <ul class="nav nav-tabs text-center">
@@ -23,15 +23,15 @@
 </ul>
 <div class="list-group">
     {% for follower in followers %}
-    <a href="#" class="list-group-item list-group-item-action d-flex flex-row">
+    <a href="{{ url 'account_userpage' target_user.id }}" class="list-group-item list-group-item-action d-flex flex-row">
         <img class="col-1 p-2"
-            src="https://1.bp.blogspot.com/-3GUksHO3Sgc/VCIkF-PenoI/AAAAAAAAmjk/by_uxGIO7hU/s800/monster02.png">
+            src='{{ follower.user_icon }}'>
         <div class="col-2 p-2 font-weight-bold"
             onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
             onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
             {{ follower }}
         </div>
-        <div class="col-8 p-2">好きな食べ物は竜田揚げです．よろしくお願いします．</div>
+        <div class="col-8 p-2">{{ follower.profile }}</div>
     </a>
     {% endfor %}
 </div>
