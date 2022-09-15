@@ -1,6 +1,6 @@
 from django.urls import path
 
-from follow import views
+from . import views
 
 
 # テスト用

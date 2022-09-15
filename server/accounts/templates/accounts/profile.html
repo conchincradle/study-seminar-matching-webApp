@@ -1,0 +1,51 @@
+{% extends "app/base.html" %}
+{% load widget_tweaks %}
+{% block navi %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">ログイン済</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+<div class="card card-auth my-5 mx-auto">
+    <div class="card body">
+        <h5 class="card-title text-center" ><b>プロファイル編集</b></h5>
+
+<form  method="post">
+    {% csrf_token %}
+    <div class="form-text">
+        <label for="user_icon"><b>ユーザーアイコン</b></label>
+        {% render_field form.user_icon class="form-control" placeholder="ユーザーアイコンURL" %}
+    </div>
+    <div class="form-text">
+        <label for="birthday"><b>誕生日</b></label>
+        {% render_field form.birthday class="form-control" placeholder="YYYY-MM-DD" %}
+    </div>
+      <div class="form-text">
+          <label for="profile">自己紹介</label>
+        {% render_field form.profile class="form-control" placeholder="私は…" %}
+    </div>
+
+      <div class="form-text">
+           <label for="sound_profile">音声紹介</label>
+        {% render_field form.sound_profile class="form-control" placeholder="音声紹介URL" %}
+    </div>
+
+
+
+
+    <div aling="center">
+        <button type="submit" class="btn btn-danger btn-lg" style="display:block;margin:0 auto">submit</button>
+
+    </div>
+
+
+
+</form>
+
+
+{% endblock %}

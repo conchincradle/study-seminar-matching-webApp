@@ -9,5 +9,6 @@ class FollowRelation(models.Model):
     user = models.OneToOneField(AccountUser, primary_key=True, on_delete=models.CASCADE)
     following = models.ManyToManyField(AccountUser, related_name='followed_by', blank=True)
 
+
     def __str__(self):
         return str(self.user.user_name)

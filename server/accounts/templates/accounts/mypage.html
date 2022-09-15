@@ -1,0 +1,103 @@
+{% extends "app/base.html" %}
+<!--zhu-->
+<!-- change the navibar -->
+{% block navi %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#">ログイン済</a>
+    </li>
+{% endblock %}
+
+<!-- my page content-->
+
+{% block content %}
+    <div>
+    <br>
+    <br>
+    </div>
+
+    <div class="container">
+        <div class="media">
+            <a class="media-left" href="#">
+                 <img src="{{ user_icon }}" class="rounded-circle"  width="300" >
+
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ようこそ！&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'account_profile' user.id %}" class="btn btn-danger">
+                        <b style="color:whitesmoke;">プロフィール編集</b>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'account_plan' user.id %}" class="btn btn-danger">
+                        <b style="color:whitesmoke;">参加予定勉強会</b>
+                    </a>
+
+
+
+                    <br><br>
+
+                     <p style="color:#BF0201">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ user_name }}</b></p>
+                </h4>
+
+
+            </div>
+        </div>
+
+    <br><br>
+        <div >
+            <p >
+                &nbsp;&nbsp; &nbsp;&nbsp;
+
+            <a href="{% url 'followings' user.id %}" class="p-3 mb-2 bg-danger text-dark">
+                <b style="color:whitesmoke;">フォロー中</b>
+            </a>
+            &nbsp;
+            <a href="{% url 'followers' user.id %}" class="p-3 mb-2 bg-danger text-dark">
+                <b style="color:whitesmoke;">フォロワー</b>
+            </a>
+            </p>
+        </div>
+    <div>
+       <br><br>
+    <h4>
+        自己紹介
+    </h4>
+
+    <p class="text-secondary">{{ profile }}
+    </p>
+    </div>
+    <div>
+    <h4>
+        年齢: {{ sedai }}代
+    </h4>
+    </div>
+
+
+
+    <div>
+     <br><br>
+    <h4>
+        音声紹介
+    </h4>
+
+    <figure>
+    <figcaption>  私の声:</figcaption>
+    <audio
+        controls
+        src="{{ sound_profile }}">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
+    </figure>
+
+    </div>
+
+
+
+
+
+{% endblock %}
