@@ -11,13 +11,12 @@
             {{ post_date.date }}
             
             <hr>
-            <h4 class="card-text">参加URL</h4><br> 
-            <a href="post_data.link" target="_blank">
-                {{ post_data.link|linebreaksbr }}</a>
-            </div>
- 
-
-        
+            <p class="card-text"> 参加URL: {{ post_data.link|linebreaksbr }}</p>
+            <!-- <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger" type=""submit>参加する</button>
+            </form> -->
+        </div>
         <div class="card-footer text-muted">
             {{ post_data.created|date }} by {{ post_data.author }}
         </div>
