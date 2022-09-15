@@ -121,13 +121,19 @@ class PlanView(LoginRequiredMixin, View):
 
 
 
-def userpage(request):
-    print(target_user.id)
-    post_data = AccountUser.objects.get(user_name=user.pk)
+def userpage(request,pk=pk):
+    def calculate_age(born):
+        today = timezone.now()
+        age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        sedai = age- age%10
+        return sedai
+    print(pk)
+    print(request.user.id)
+    post_data = AccountUser.objects.get(user_name=pk)
     print(post_data)
-    sedai = self.calculate_age(post_data.birthday)
+    sedai = calculate_age(post_data.birthday)
     context = {
-        'user_name': user.username,
+        'user_name': request.user.username,
         'user_icon': post_data.user_icon,
         'profile': post_data.profile,
         'sound_profile': post_data.sound_profile,

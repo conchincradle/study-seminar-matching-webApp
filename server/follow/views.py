@@ -16,6 +16,10 @@ class followings(View):
         relations = FollowRelation(user=target_user)
         followings = relations.following.all()
         return render(request, "follow/followings.html", {'target_user': target_user, 'followings': followings})
+    def post(self,request,pk,*args,**kwargs):
+        return render(request,)
+
+
 
 class followers(View):
     def get(self, request, *args, **kwargs):

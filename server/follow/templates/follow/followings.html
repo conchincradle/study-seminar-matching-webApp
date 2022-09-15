@@ -23,7 +23,7 @@
 </ul>
 <div class="list-group">
     {% for following in followings %}
-    <a href="#" class="list-group-item list-group-item-action d-flex flex-row">
+    <a href="{% url 'account_userpage' pk = 5 %}" class="list-group-item list-group-item-action d-flex flex-row">
         <img class="col-1 p-2"
             src="{{ following.user_icon }}">
         <div class="col-2 p-2 font-weight-bold"
