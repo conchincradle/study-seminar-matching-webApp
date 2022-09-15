@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class= my-sm-4>
+    <a href="/home" class="btn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"/>戻る</a>
     <div class="card mb-4">
         <div class="card-body">
             <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
@@ -14,7 +15,6 @@
         </div>
         <div class="card-footer text-muted">
             {{ post_data.created|date }} by {{ post_data.author }}
-            <a href="/home" class="btn btn-danger">戻る</a>
         </div>
     </div>
 </div>
