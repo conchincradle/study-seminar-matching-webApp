@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+<div class= my-sm-4>
+    <div class="card mb-4">
+        <div class="card-body">
+            <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
+            
+            <h2 class="card-title">{{ post_data.title }}
+            <hr>
+            <p class="card-text"> 参加URL: {{ post_data.link|linebreaksbr }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post_data.created|date }} by {{ post_data.author }}
+        </div>
+    </div>
+</div>
+
+{% if post_data.author ==  user %}
+<div class="d-flex mb-5">
+    <a href="{% url 'post_edit' post_data.id %}" class="btn btn-warning mr-2">編集する</a>
+    <a href="{% url 'post_delete' post_data.id %}" class="btn btn-danger">削除する</a>
+</div>
+{% endif %}
+
+{% endblock %}

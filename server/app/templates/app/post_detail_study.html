@@ -6,23 +6,24 @@
     <div class="card mb-4">
         <div class="card-body">
             <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
-
+            
             <h2 class="card-title">{{ post_data.title }}
             <hr>
 
             <p class="card-text">{{ post_data.content|linebreaksbr }}</p>
+            <a href="{% url 'study_participate' post_data.id %}" class="btn btn-warning mr-2">参加</a>
         </div>
         <div class="card-footer text-muted">
             {{ post_data.created|date }} by {{ post_data.author }}
-            <a href="/home" class="btn btn-danger">戻る</a>
+            <a href="/study" class="btn btn-danger">戻る</a>
         </div>
     </div>
 </div>
 
 {% if post_data.author ==  user %}
 <div class="d-flex mb-5">
-    <a href="{% url 'post_edit' post_data.id %}" class="btn btn-warning mr-2">編集する</a>
-    <a href="{% url 'post_delete' post_data.id %}" class="btn btn-danger">削除する</a>
+    <a href="{% url 'post_study_edit' post_data.id %}" class="btn btn-warning mr-2">編集する</a>
+    <a href="{% url 'post_study_delete' post_data.id %}" class="btn btn-danger">削除する</a>
 </div>
 {% endif %}
 
@@ -36,6 +37,7 @@
     <div class="media-content">
         <div class="content">
             <p>
+                <a>{{comment.posted_id}}</a>
                 <strong>
                     
                     <small>{{comment.created}} by {{ comment.author }}</small>
