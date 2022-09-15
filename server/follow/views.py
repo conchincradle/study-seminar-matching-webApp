@@ -15,9 +15,10 @@ class followings(View):
         print(target_user.user_name)
         relations = FollowRelation(user=target_user)
         followings = relations.following.all()
+
         return render(request, "follow/followings.html", {'target_user': target_user, 'followings': followings})
     def post(self,request,pk,*args,**kwargs):
-        return render(request,)
+        return render(request)
 
 
 

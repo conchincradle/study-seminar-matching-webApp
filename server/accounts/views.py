@@ -27,10 +27,6 @@ class SignupView(views.SignupView):
 
 
 
-# class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-#     model = AccountUser
-#     form_class = ProfileEditForm
-#     template_name = 'accounts/post_form.html'
 class ProfileUpdateView(LoginRequiredMixin, FormView):
     template_name = 'accounts/post_form.html'
     form_class = ProfileEditForm
@@ -121,7 +117,7 @@ class PlanView(LoginRequiredMixin, View):
 
 
 
-def userpage(request,pk=pk):
+def userpage(request,pk):
     def calculate_age(born):
         today = timezone.now()
         age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
@@ -133,7 +129,7 @@ def userpage(request,pk=pk):
     print(post_data)
     sedai = calculate_age(post_data.birthday)
     context = {
-        'user_name': request.user.username,
+        'user_name': post_data.user_name,
         'user_icon': post_data.user_icon,
         'profile': post_data.profile,
         'sound_profile': post_data.sound_profile,
@@ -145,15 +141,6 @@ def userpage(request,pk=pk):
 
     return render(request,'accounts/userpage.html',context)
 
-'''
-from django.core.files.base import ContentFile
-def save_file(request):
-    mymodel = MyModel.objects.get(id=1)
-  
-    file_content = ContentFile(request.FILES['video'].read())
- 
-    mymodel.video.save(request.FILES['video'].name, file_content)
-'''
 
 ###### test zhu
 

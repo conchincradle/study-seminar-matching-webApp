@@ -24,7 +24,7 @@
 <div class="list-group">
     {% for follower in followers %}
 
-    <a href="{% url 'account_userpage' {{ follower.id }} %}" class="list-group-item list-group-item-action d-flex flex-row">
+    <a href="{% url 'account_userpage'  follower.id  %}" class="class="d-flex mb-5">
         <img class="col-1 p-2"
             src='{{ follower.user_icon }}'>
         <div class="col-2 p-2 font-weight-bold"
