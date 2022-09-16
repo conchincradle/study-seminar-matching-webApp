@@ -13,12 +13,7 @@ from deep_translator import GoogleTranslator
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         item_name = request.GET.get('item_name')
-
-
-
-
         post_data = Post.objects.order_by('-id')
-
         if item_name != '' and item_name is not None:
             item_name = GoogleTranslator(source='auto', target='ja').translate(item_name)
             #print(item_name)
@@ -26,8 +21,6 @@ class IndexView(View):
         imgs = []
         for post in post_data:
             imgs.append(AccountUser.objects.get(id=post.author.id).user_icon)
-
-
         return render(request, 'app/index.html',  {
             'post_data': list(zip(post_data,imgs))
         })
