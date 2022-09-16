@@ -8,7 +8,7 @@ from allauth.account import views
 from django.utils import timezone
 from .forms import UserForm
 from django.views.generic import View
-from app.models import AppSeminar
+from app.models import AppSeminar,AppSeminarParticipant
 
 
 class LoginView(views.LoginView):
@@ -61,14 +61,15 @@ class MypageView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user = request.user
 
-        print(type(AccountUser.user_name))
-        print(AccountUser.objects.values())
-        print("-------------------------------")
-        print(AccountUser.objects.values())
+        #print(type(AccountUser.user_name))
+        #print(AccountUser.objects.values())
+        #print("-------------------------------")
+       # print(AccountUser.objects.values())
 
 
-        post_data, created = AccountUser.objects.get_or_create(user_name_id=user.id,birthday=timezone.now(),user_icon='111111111',sound_profile='1111111',profile='編集をお願いします！')
-        print(post_data)
+        #post_data, created = AccountUser.objects.get_or_create(user_name_id=user.id,birthday=timezone.now(),user_icon='111111111',sound_profile='1111111',profile='編集をお願いします！')
+        post_data  =  AccountUser.objects.get(id=user.id)
+        #print(post_data)
         sedai = self.calculate_age(post_data.birthday)
         context={
             'user_name': user.username,
@@ -79,7 +80,7 @@ class MypageView(LoginRequiredMixin, View):
 
 
         }
-        print(post_data.user_icon)
+        #print(post_data.user_icon)
 
         return render(request, 'accounts/mypage.html', context)
 
@@ -98,24 +99,24 @@ class MypageView(LoginRequiredMixin, View):
             return redirect('post_detail', post_data.id)
         
         return render(request, 'accounts/post_form.html', {
-            'form':form
+            'form': form
         })      
         
 
 # mypage test-Zhu
 class PlanView(LoginRequiredMixin, View):
-    def get(self,request,*args,**kwargs):
+    def get(self, request,  *args, **kwargs):
 
-        print("------------------")
+        #print("------------------")
         #postData = AppSeminar.objects.filter(author_id=user.pk)
-        content = {
-            'title': 'ABC study group seminar',
-            'content': "We will hold the ,meeting between 13:00-15:00 on 9/17. ",
-            'zoom_link': "zoom_link",
-        }
+        seminars = AppSeminarParticipant.objects.filter(user=request.user)
+        plans = []
+        for seminar in seminars:
+            plans.append(seminar.seminar)
+        seminars = plans
+        #print(plans[0].link)
 
-
-        return render(request, 'accounts/plan.html',{'content': content})
+        return render(request, 'accounts/plan.html', {'seminars': seminars})
 
 
 
@@ -125,10 +126,10 @@ def userpage(request,pk):
         age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
         sedai = age- age%10
         return sedai
-    print(pk)
-    print(request.user.id)
-    post_data = AccountUser.objects.get(user_name=pk)
-    print(post_data)
+    #print(pk)
+    #print(request.user.id)
+    post_data = AccountUser.objects.get(id=pk)
+   # print(post_data)
     sedai = calculate_age(post_data.birthday)
     context = {
         'user_name': post_data.user_name,
@@ -138,7 +139,7 @@ def userpage(request,pk):
         'sedai': sedai,
 
     }
-    print(post_data.user_icon)
+    #print(post_data.user_icon)
 
 
     return render(request,'accounts/userpage.html',context)
@@ -156,10 +157,10 @@ class ProfileView(View):
         # <view logic>
         return render(request, 'accounts/profile.html',{"form":form})
     def post(self,request, *args, **kwargs):
-        print(request.POST)
+        #print(request.POST)
         form = UserForm(request.POST or None)
         # check whether it's valid:
-        print(form)
+       #print(form)
 
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -170,7 +171,7 @@ class ProfileView(View):
             data.birthday = form.cleaned_data['birthday']
             data.profile = form.cleaned_data['profile']
             data.sound_profile = form.cleaned_data['sound_profile']
-            print(data.user_icon)
+            #print(data.user_icon)
 
 
             # redirect to a new URL:

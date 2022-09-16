@@ -6,20 +6,44 @@ from requests import post
 from .models import Post, AppComment, AppSeminar, AppSeminarParticipant
 from .forms import PostForm, CommentForm, PostStudyForm, CommentStudyForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from accounts.models import AccountUser
+from deep_translator import GoogleTranslator
 
 # インデックスを表示
 class IndexView(View):
     def get(self, request, *args, **kwargs):
+        item_name = request.GET.get('item_name')
+
+
+
+
         post_data = Post.objects.order_by('-id')
+
+        if item_name != '' and item_name is not None:
+            item_name = GoogleTranslator(source='auto', target='ja').translate(item_name)
+            #print(item_name)
+            post_data = Post.objects.filter(content__icontains=item_name)
+        imgs = []
+        for post in post_data:
+            imgs.append(AccountUser.objects.get(id=post.author.id).user_icon)
+
+
         return render(request, 'app/index.html',  {
-            'post_data': post_data
+            'post_data': list(zip(post_data,imgs))
         })
 
 
 class IndexStudyView(View):
     def get(self, request, *args, **kwargs):
         """自分の投稿と，フォローしているユーザーの投稿のみmを返す"""
+        item_name = request.GET.get('item_name')
         post_data = AppSeminar.objects.order_by('-id')
+
+        if item_name != '' and item_name is not None:
+            item_name = GoogleTranslator(source='auto', target='ja').translate(item_name)
+            #print(item_name)
+            post_data = AppSeminar.objects.filter(content__icontains=item_name)
+
         return render(request, 'app/study_posts.html',  {
             'post_data': post_data
         })
@@ -27,6 +51,7 @@ class IndexStudyView(View):
 class PostDetailView(View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
+        img = AccountUser.objects.get(id=post_data.author.id).user_icon
         
 
         #  コメントを表示
@@ -35,8 +60,9 @@ class PostDetailView(View):
         else:
             form = CommentForm()
 
+
         return render(request, 'app/post_detail.html', {
-            'post_data': post_data, 'form': form
+            'post_data': post_data, 'form': form,'img': img
         })
         
     def post(self, request, *args, **kwargs):
@@ -57,9 +83,11 @@ class PostDetailView(View):
             'post_data': post_data, 'form': form
         })
 
+# to do :  duplicate
 class PostStudyDetailView(View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.get(id=self.kwargs['pk'])
+        img = AccountUser.objects.get(id=post_data.author.id).user_icon
         
 
         #  コメントを表示
@@ -69,7 +97,7 @@ class PostStudyDetailView(View):
             form = CommentForm()
 
         return render(request, 'app/post_detail.html', {
-            'post_data': post_data, 'form': form
+            'post_data': post_data, 'form': form, 'img': img
         })
         
     def post(self, request, *args, **kwargs):
@@ -94,6 +122,7 @@ class PostStudyDetailView(View):
 class PostStudyDetailView(View):
     def get(self, request, *args, **kwargs):
         post_data = AppSeminar.objects.get(id=self.kwargs['pk'])
+        img = AccountUser.objects.get(id=post_data.author.id).user_icon
         
         #  コメントを表示
         if request.method == "POST":
@@ -102,7 +131,7 @@ class PostStudyDetailView(View):
             form = CommentStudyForm()
 
         return render(request, 'app/post_detail_study.html', {
-            'post_data': post_data, 'form': form
+            'post_data': post_data, 'form': form , 'img': img
         })
         
     def post(self, request, *args, **kwargs):

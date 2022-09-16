@@ -6,7 +6,7 @@
     <a href="/home" class="btn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"/>戻る</a>
     <div class="card mb-4">
         <div class="card-body">
-            <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
+            <img src="{{ img}}" class="avatar float-left rounded-circle" style="max-width:10%;"/>
 
             <h2 class="card-title">{{ post_data.title }}
             <hr>
@@ -29,7 +29,7 @@
 {% if user.is_authenticated %}
 <hr>
 <!--　コメントされたものを表示 -->
-<h2 class="subtitle">コメント</h2>
+<h4 class="subtitle">コメント</h4>
 
 {% for comment in post_data.comments.all %}
 <article class="media">
@@ -54,12 +54,12 @@
 {% endfor%}
 <hr>
 <!--　コメント投稿エリア -->
-<h2 class="subtitle">コメントを追加</h2>
+<h5 class="subtitle">コメントを追加</h5>
 <form action="" method="post">{% csrf_token %}
     {{form.as_p}}
     <div class="formpost">
         <div class="formpost">
-            <button class="btn btn-warning", type="submit">送信</button>
+            <button class="btn btn-warning", type="submit" >送信</button>
 
         </div>
     </div>

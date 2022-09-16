@@ -9,14 +9,14 @@
 
 <ul class="nav nav-tabs text-center">
     <li class="nav-item col-6 p-2">
-        <a class="nav-link text-muted border font-weight-bold" href="/follow/followings/{{ user.id }}"
+        <a class="nav-link text-muted border font-weight-bold" href="/follow/followings/{{ target_user.id }}"
             onMouseOver="this.style.color='#0067C0'; this.style.textDecoration='underline';"
             onMouseOut="this.style.color='#000'; this.style.textDecoration='none';">
             フォロー中
         </a>
     </li>
     <li class="nav-item col-6 p-2">
-        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers{{ user.id }}">
+        <a class="nav-link active bg-white text-dark border font-weight-bold" href="/follow/followers{{ target_user.id }}">
             フォロワー
         </a>
     </li>
@@ -24,7 +24,7 @@
 <div class="list-group">
     {% for follower in followers %}
 
-    <a href="{% url 'account_userpage'  follower.id  %}" class=d-flex mb-5">
+    <a href="{% url 'account_userpage'  follower.id  %}" class="d-flex mb-5">
         <img class="col-1 p-2"
             src='{{ follower.user_icon }}'>
         <div class="col-2 p-2 font-weight-bold"

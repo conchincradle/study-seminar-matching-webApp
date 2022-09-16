@@ -4,13 +4,18 @@
 
 <div class= my-sm-4>
     <a href="/home" class="btn"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"/>戻る</a>
-    <div class="mb-1"/>    
+
     <div class="card mb-4">
         <div class="card-body">
-            <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/>
-            
-            <h2 class="card-title">{{ post_data.title }}
-            <hr>
+
+             <a href="{% url 'account_userpage' post_data.author.id %}" class="media-left">
+            <img src="{{ img }}" class="avatar float-left rounded-circle" style="max-width:10%;"/>
+             </a>
+            <br><br>
+
+            <h2 class="card-title">&nbsp;&nbsp;&nbsp;{{ post_data.title }}
+            </h2>
+            <br><br>
 
             <p class="card-text">{{ post_data.content|linebreaksbr }}</p>
             <a href="{% url 'study_participate' post_data.id %}" class="btn btn-warning mr-2">勉強会に参加する</a>
@@ -31,7 +36,7 @@
 {% if user.is_authenticated %}
 <hr>
 <!--　コメントされたものを表示 -->
-<h2 class="subtitle">コメント</h2>
+<h4 class="subtitle">コメント</h4>
 
 {% for comment in post_data.comments.all %}
 <article class="media">
@@ -57,7 +62,7 @@
 {% endfor%}
 <hr>
 <!--　コメント投稿エリア -->
-<h2 class="subtitle">コメントを追加</h2>
+<h4 class="subtitle">コメントを追加</h4>
 <form action="" method="post">{% csrf_token %}
     {{form.as_p}}
     <div class="formpost">

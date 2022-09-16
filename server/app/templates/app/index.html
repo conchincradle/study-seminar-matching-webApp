@@ -1,6 +1,21 @@
 {% extends "app/base.html" %}
 
 {% block content %}
+            <div class="row m-5">
+            <div class="col-md-12">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col">
+                            <input type="search" name='item_name' placeholder="投稿の検索" class="form-control form-control-borderless">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-success" type="submit" >検索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
 <div class="row my-4">
     <div class="col-md-8">
@@ -12,13 +27,21 @@
                 <a class="nav-link" href="/study">開催予定の勉強会</a>
             </li>
         </ul>
-        {% for post in post_data %}
+        {% for post, img in post_data %}
         <div class="card mb-4">
             <div class="card-body">
                 <a href="{% url 'post_detail' post.author_id %}">
-                <img src="https://i.gyazo.com/0f0a76e00c34c7e0a1dd400d9d9003f8.jpg" class="avatar float-left rounded-circle" style="max-width:20%;"/></a>
+                </a>
                 <div class="mb-10">
-                    <h2 class="card-title">{{ post.title }}</h2>
+                    <h2 class="card-title">
+                        <div>
+                            <a href="{% url 'account_userpage' post.author_id %}" class="media-left">
+                        <img src="{{ img }}" style="max-width:10%;"/>
+                            </a>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ post.title }}
+                        </div>
+
+                    </h2>
                     <p class="card-text">{{ post.content | truncatechars:100}}</p>
                 </div>
                 
