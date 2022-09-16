@@ -23,7 +23,7 @@ python manage.py runserver 0.0.0.0:8000
 - for myself: I should access http://127.0.0.1:8000/home/
 - 
 
-<img src="/1.png">
+<img src="server/imgs_app/1.png">
 <img src="server/imgs_app/2.png">
 
 
