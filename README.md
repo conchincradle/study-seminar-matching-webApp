@@ -1,4 +1,17 @@
-# team9
+# Study Seminar Matching Web Application
+- We, a team of 6 students,  created this project in Sep. 2022 in the internship of Rakuten Corp.
+- By this app, users can post a study seminar with zoom links and contents, and they can search for their interested seminars.
+- Other features: post a post and comment, a page show seminars they plan to join, a page to register profile information, pages show following and follwers
+
+###  Timeline
+<img src="server/imgs_app/1.png">
+### MyPage
+<img src="server/imgs_app/2.png">
+### follow page
+<img src="server/imgs_app/3.png">
+### target user page
+<img src="server/imgs_app/4.png">
+
 
 ### How to use
 - I added 10 account users, so to see the demo, do not delete database
@@ -23,8 +36,7 @@ python manage.py runserver 0.0.0.0:8000
 - for myself: I should access http://127.0.0.1:8000/home/
 - 
 
-<img src="server/imgs_app/1.png">
-<img src="server/imgs_app/2.png">
+
 
 
 - Git
