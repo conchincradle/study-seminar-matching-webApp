@@ -1,7 +1,7 @@
 # Study Seminar Matching Web Application
 - We, a team of 6 students,  created this project in Sep. 2022 in the internship of Rakuten Corp.
 - By this app, users can post a study seminar with zoom links and contents, and they can search for their interested seminars.
-- Other features: post a post and comment, a page show seminars they plan to join, a page to register profile information, pages show following and follwers
+- Other functions: post a post and comment, a page show seminars they plan to join, a page to register profile information, pages show following and follwers
 - Dev tools: Boostrap (html,css) + Django, Python, SQLite
 
 ###  Timeline
