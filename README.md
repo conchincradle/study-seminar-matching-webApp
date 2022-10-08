@@ -37,7 +37,14 @@ python manage.py runserver 0.0.0.0:8000
 - for myself: I should access http://127.0.0.1:8000/home/
 - 
 
-
+#### my personal contribution
+- Backend: 
+- Implemented search box function and translation function
+- Frontend:
+- Implemented mypage (show personal information)
+- Other:
+- Integrated the
+- Wrote test cases
 
 
 - Git
