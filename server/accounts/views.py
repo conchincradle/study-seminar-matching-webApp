@@ -60,16 +60,7 @@ class MypageView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-
-        #print(type(AccountUser.user_name))
-        #print(AccountUser.objects.values())
-        #print("-------------------------------")
-       # print(AccountUser.objects.values())
-
-
-        #post_data, created = AccountUser.objects.get_or_create(user_name_id=user.id,birthday=timezone.now(),user_icon='111111111',sound_profile='1111111',profile='編集をお願いします！')
         post_data  =  AccountUser.objects.get(id=user.id)
-        #print(post_data)
         sedai = self.calculate_age(post_data.birthday)
         context={
             'user_name': user.username,
@@ -145,8 +136,7 @@ def userpage(request,pk):
     return render(request,'accounts/userpage.html',context)
 
 
-###### test zhu
-
+# test for html zhu
 def profile(request):
     return render(request,"accounts/profile.html")
 
@@ -156,6 +146,7 @@ class ProfileView(View):
         form = UserForm(request.POST or None)
         # <view logic>
         return render(request, 'accounts/profile.html',{"form":form})
+
     def post(self,request, *args, **kwargs):
         #print(request.POST)
         form = UserForm(request.POST or None)
@@ -171,7 +162,7 @@ class ProfileView(View):
             data.birthday = form.cleaned_data['birthday']
             data.profile = form.cleaned_data['profile']
             data.sound_profile = form.cleaned_data['sound_profile']
-            #print(data.user_icon)
+            # print(data.user_icon)
 
 
             # redirect to a new URL:
