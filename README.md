@@ -20,6 +20,10 @@
 <div align=center><img src="server/imgs_app/4.png" width="600" height="400" /></div>
 <p align="center">other users' page</p>
 
+### deploy to AWS EC2
+<div align=center><img src="https://user-images.githubusercontent.com/33627638/196027095-2bc70784-f2ff-4d22-be2d-46176abf381d.png" width="600" height="400" /></div>
+<p align="center">the page acessed by public IP address</p>
+- so it should revised to adapt to smartphone screen
 
 ### How to use
 - I added 10 account users, so to see the demo, do not delete database
