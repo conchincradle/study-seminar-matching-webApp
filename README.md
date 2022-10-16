@@ -5,19 +5,19 @@
 - Dev tools: Boostrap (html,css) + Django, Python, SQLite
 
 ### Timeline
-<div align=center><img src="server/imgs_app/1.png" width="600" height="300" /></div>
+<div align=center><img src="server/imgs_app/1.png" width="600" height="400" /></div>
 <p align="center">Timeline</p>
 
 ### MyPage
-<div align=center><img src="server/imgs_app/2.png" width="600" height="300" /></div>
+<div align=center><img src="server/imgs_app/2.png" width="600" height="400" /></div>
 <p align="center">MyPage</p>
 
 ### follow page
-<div align=center><img src="server/imgs_app/3.png" width="600" height="300" /></div>
+<div align=center><img src="server/imgs_app/3.png" width="600" height="400" /></div>
 <p align="center">follow page</p>
 
 ### other users' page
-<div align=center><img src="server/imgs_app/4.png" width="600" height="300" /></div>
+<div align=center><img src="server/imgs_app/4.png" width="600" height="400" /></div>
 <p align="center">other users' page</p>
 
 
