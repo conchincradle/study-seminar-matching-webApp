@@ -7,12 +7,15 @@
 ###  Timeline
 <div align=center><img src="server/imgs_app/1.png" width="600" height="450" /></div>
 <p align="center">Timeline</p>
-### MyPage
-<img src="server/imgs_app/2.png">
-### follow page
-<img src="server/imgs_app/3.png">
+###  MyPage
+<div align=center><img src="server/imgs_app/2.png" width="600" height="450" /></div>
+<p align="center">MyPage</p>
+###  follow page
+<div align=center><img src="server/imgs_app/3.png" width="600" height="450" /></div>
+<p align="center">follow page</p>
 ### target user page
-<img src="server/imgs_app/4.png">
+<div align=center><img src="server/imgs_app/4.png" width="600" height="450" /></div>
+<p align="center">target user page</p>
 
 
 ### How to use
