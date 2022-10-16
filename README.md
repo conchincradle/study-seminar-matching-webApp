@@ -4,18 +4,21 @@
 - Other functions: post a post and comment, a page show seminars they plan to join, a page to register profile information, pages show following and follwers
 - Dev tools: Boostrap (html,css) + Django, Python, SQLite
 
-###  Timeline
-<div align=center><img src="server/imgs_app/1.png" width="600" height="450" /></div>
+### Timeline
+<div align=center><img src="server/imgs_app/1.png" width="600" height="300" /></div>
 <p align="center">Timeline</p>
-###  MyPage
-<div align=center><img src="server/imgs_app/2.png" width="600" height="450" /></div>
+
+### MyPage
+<div align=center><img src="server/imgs_app/2.png" width="600" height="300" /></div>
 <p align="center">MyPage</p>
-###  follow page
-<div align=center><img src="server/imgs_app/3.png" width="600" height="450" /></div>
+
+### follow page
+<div align=center><img src="server/imgs_app/3.png" width="600" height="300" /></div>
 <p align="center">follow page</p>
-### target user page
-<div align=center><img src="server/imgs_app/4.png" width="600" height="450" /></div>
-<p align="center">target user page</p>
+
+### other users' page
+<div align=center><img src="server/imgs_app/4.png" width="600" height="300" /></div>
+<p align="center">other users' page</p>
 
 
 ### How to use
