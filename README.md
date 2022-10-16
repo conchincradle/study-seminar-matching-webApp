@@ -5,7 +5,7 @@
 - Dev tools: Boostrap (html,css) + Django, Python, SQLite
 
 ###  Timeline
-<div align=center><img src="server/imgs_app/1.png" width="450" height="450" /></div>
+<div align=center><img src="server/imgs_app/1.png" width="450" height="600" /></div>
 <p align="center">Timeline</p>
 ### MyPage
 <img src="server/imgs_app/2.png">
