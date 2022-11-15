@@ -5,7 +5,9 @@
 - Dev tools: Boostrap (html,css) + Django, Python, SQLite
 - Dev tools: Docker, Git, Selenium + WebDriver (test)
 
-![image](https://user-images.githubusercontent.com/33627638/201904990-12af4004-5d84-414a-97eb-c411f052bcad.png)
+
+<div align=center><img src="https://user-images.githubusercontent.com/33627638/201904990-12af4004-5d84-414a-97eb-c411f052bcad.png" width="600" height="400" /></div>
+<p align="center">Timeline</p>
 
 
 ### Timeline
