@@ -3,7 +3,7 @@
 - By this app, users can post a study seminar with zoom links and contents, and they can search for their interested seminars.
 - Other functions: post a post and comment, a page show seminars they plan to join, a page to register profile information, pages show following and follwers
 - Dev tools: Boostrap (html,css) + Django, Python, SQLite
-- Dev tools: Docker, Git, Selenium + WebDriver (test)
+- Dev tools: Docker, Git
 
 
 <div align=center><img src="https://user-images.githubusercontent.com/33627638/201904990-12af4004-5d84-414a-97eb-c411f052bcad.png" width="600" height="400" /></div>
